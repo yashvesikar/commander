@@ -66,13 +66,16 @@ $ commander caddy reload
 
 ---
 
-## ⚙️ Build
+## 📁 Installation
+
+Download a prebuilt binary from the [Releases page](https://github.com/yashvesikar/commander/releases), then:
 
 ```bash
-go build -o commander main.go
+chmod +x commander-linux-amd64
+mv commander-linux-amd64 /usr/local/bin/commander
 ```
 
-Run `commander` from the root of your `apps/` directory.
+Replace `commander-linux-amd64` with the appropriate binary for your system.
 
 ---
 
@@ -85,6 +88,22 @@ Run `commander` from the root of your `apps/` directory.
 
 ---
 
-## License
+## 🤝 Contributing
+
+This project was primarily to manage my own home server but happy to take contributions.
+
+To build the project locally:
+
+```bash
+git clone https://github.com/yashvesikar/commander.git
+cd commander
+go build -o commander main.go
+```
+
+You can now run `./commander` from your working directory. Make sure you have Go 1.22 or later installed.
+
+---
+
+## 🗪 License
 
 MIT License
