@@ -1,0 +1,46 @@
+# .github/workflows/release.yml
+
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger on version tags like v1.0.0
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build and Release Binary
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+
+      - name: Build binaries
+        run: |
+          mkdir -p dist
+
+          # Linux/Windows/macOS
+          GOOS=linux   GOARCH=amd64 go build -o dist/commander-linux-amd64 main.go
+          GOOS=darwin  GOARCH=amd64 go build -o dist/commander-darwin-amd64 main.go
+          GOOS=windows GOARCH=amd64 go build -o dist/commander-windows-amd64.exe main.go
+
+          # Raspberry Pi / ARM builds
+          GOOS=linux GOARCH=arm GOARM=6  go build -o dist/commander-linux-armv6 main.go
+          GOOS=linux GOARCH=arm GOARM=7  go build -o dist/commander-linux-armv7 main.go
+          GOOS=linux GOARCH=arm64        go build -o dist/commander-linux-arm64 main.go
+
+      - name: Upload release artifacts
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
