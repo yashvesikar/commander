@@ -68,7 +68,15 @@ $ commander caddy reload
 
 ## 📁 Installation
 
-Download a prebuilt binary from the [Releases page](https://github.com/yashvesikar/commander/releases), then:
+To install Commander with a single command:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/yashvesikar/commander/main/install.sh | bash
+```
+
+This script automatically detects your OS and architecture, downloads the latest release, and installs it to `/usr/local/bin`.
+
+Alternatively, you can manually download a prebuilt binary from the [Releases page](https://github.com/yashvesikar/commander/releases):
 
 ```bash
 chmod +x commander-linux-amd64
